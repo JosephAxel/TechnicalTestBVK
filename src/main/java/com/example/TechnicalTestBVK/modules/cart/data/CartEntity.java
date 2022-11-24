@@ -1,5 +1,4 @@
 package com.example.TechnicalTestBVK.modules.cart.data;
-import com.example.TechnicalTestBVK.modules.cart.vo.TotalItem;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,9 +20,6 @@ public class CartEntity {
     )
     @Column(name = "id")
     private Integer id;
-
-//    @Embedded
-//    private TotalItem totalItem;
 
     @OneToMany(mappedBy = "cart")
     private List<CartItemEntity> items;

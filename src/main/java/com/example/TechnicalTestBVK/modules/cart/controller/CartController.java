@@ -1,8 +1,10 @@
 package com.example.TechnicalTestBVK.modules.cart.controller;
 
+import com.example.TechnicalTestBVK.modules.cart.data.CartEntity;
 import com.example.TechnicalTestBVK.modules.cart.dto.CartDTO;
 import com.example.TechnicalTestBVK.modules.cart.dto.CreateCartDTO;
 import com.example.TechnicalTestBVK.modules.cart.service.CartService;
+import com.example.TechnicalTestBVK.modules.item.data.ItemEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +24,11 @@ public class CartController {
         return cartService.save(dto);
     }
 
-//    @GetMapping("/customers/{userId}")
-//    public CartDTO find(
-//            @PathVariable("userId") CustomerEntity customer
-//    ) throws Exception{
-//        return cartService.getCartItem(customer);
-//    }
+//    1 here usually is an id but since i hardcoded it on service it doesn't matter
+    @GetMapping("/1")
+    public CartDTO find() throws Exception{
+        return cartService.getCartItem();
+    }
 
 //    @Transactional
 //    @PutMapping("/customers/{userId}")
@@ -38,11 +39,15 @@ public class CartController {
 //        return cartService.update(dtos, customer);
 //    }
 
-//    @Transactional
-//    @DeleteMapping("{id}")
-//    public CartDTO delete(
-//            @PathVariable("id") CartEntity cart
-//    ) throws Exception{
-//        return cartService.delete(cart);
-//    }
+    @Transactional
+    @DeleteMapping("/1")
+    public CartDTO deleteAll() throws Exception{
+        return cartService.deleteAll();
+    }
+
+    @Transactional
+    @DeleteMapping("/1/item/{id}")
+    public CartDTO deleteOneItem(@PathVariable("id") ItemEntity item) throws Exception{
+        return cartService.deleteOneItem(item);
+    }
 }

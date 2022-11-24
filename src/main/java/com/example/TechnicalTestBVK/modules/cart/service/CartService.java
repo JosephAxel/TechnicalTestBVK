@@ -8,7 +8,6 @@ import com.example.TechnicalTestBVK.modules.cart.dto.CartItemDTO;
 import com.example.TechnicalTestBVK.modules.cart.dto.CreateCartDTO;
 import com.example.TechnicalTestBVK.modules.cart.repository.CartItemRepository;
 import com.example.TechnicalTestBVK.modules.cart.repository.CartRepository;
-import com.example.TechnicalTestBVK.modules.cart.vo.TotalItem;
 import com.example.TechnicalTestBVK.modules.item.data.ItemEntity;
 import com.example.TechnicalTestBVK.modules.item.dto.ItemDTO;
 import com.example.TechnicalTestBVK.modules.item.repository.ItemRepository;
@@ -26,30 +25,35 @@ public class CartService {
     private final ItemRepository itemRepository;
     private final CartItemRepository cartItemRepository;
 
-//    public CartDTO getCartItem() throws Exception{
-//        CartEntity cart = cartRepository.findByCustomer(customer);
-//        if (cart == null){
-//            cart = cartRepository.saveAndFlush(new CartEntity(customer));
-//        }
-//
-//        List<CartItemEntity> cartItems = cartItemRepository.findByCart(cart);
-//        List<CartItemDTO> cartItemDTOS = new ArrayList<>();
-//        Integer totalItem = 0;
-//        Float totalPrice = 0f;
-//
-//        if (cartItems.size() > 0){
-//            for (CartItemEntity cartItem : cartItems){
-//                ItemDTO itemDTO = new ItemDTO(cartItem.getItem());
-//                itemDTO.setQuantity(cartItem.getQuantity().getQuantity());
-//                CartItemDTO cartItemDTO = new CartItemDTO(cartItem.getId(), itemDTO);
-//                cartItemDTOS.add(cartItemDTO);
-//                totalItem += cartItem.getQuantity().getQuantity();
-//                totalPrice = totalPrice + cartItem.getItem().getSellPrice().getSellPrice().floatValue() * cartItem.getQuantity().getQuantity().floatValue();
-//            }
-//        }
-//
-//        return new CartDTO(cart.getId(), totalItem, totalPrice, customerDTO, cartItemDTOS);
-//    }
+    public CartDTO getCartItem() throws Exception{
+//      i hardcoded the cart id by 1 for this technical test purpose only
+        CartEntity cart = cartRepository.findById(1).orElse(null);
+//      this is for init the cart if there is no cart founded in the database
+        if (cart == null){
+            cart = cartRepository.saveAndFlush(new CartEntity());
+        }
+
+        List<CartItemEntity> cartItems = cartItemRepository.findByCart(cart);
+        List<CartItemDTO> cartItemDTOS = new ArrayList<>();
+        Integer totalItem = 0;
+        Float totalPrice = 0f;
+
+        for (CartItemEntity cartItem : cartItems){
+            ItemDTO itemDTO = new ItemDTO(cartItem.getItem());
+            itemDTO.setQuantity(cartItem.getBuyQuantity().getQuantity());
+            CartItemDTO cartItemDTO = new CartItemDTO(
+                    cartItem.getId(),
+                    cartItem.getBuyQuantity().getQuantity(),
+                    cartItem.getSellPrice().getSellPrice(),
+                    itemDTO);
+
+            cartItemDTOS.add(cartItemDTO);
+            totalItem += cartItemDTO.getBuyQuantity();
+            totalPrice += cartItemDTO.getBuyQuantity().floatValue() * cartItemDTO.getSellPrice().floatValue();
+        }
+
+        return new CartDTO(cart.getId(), totalItem, totalPrice, cartItemDTOS);
+    }
 
     public CartDTO save(CreateCartDTO dto) throws Exception{
 //      i hardcoded the cart id by 1 for this technical test purpose only
@@ -91,7 +95,6 @@ public class CartService {
         }
 
         cart.setItems(cartItems);
-//        cart.setTotalItem(new TotalItem(totalItem));
         cartRepository.saveAndFlush(cart);
         return new CartDTO(cart.getId(), totalItem, totalPrice, cartItemDTOS);
     }
@@ -118,10 +121,17 @@ public class CartService {
 //        return null;
 //    }
 
-//    public CartDTO delete(CartEntity cart) throws Exception{
-//        cartItemRepository.deleteByCart(cart);
-//        return getCartItem(cart.getCustomer());
-//    }
+    public CartDTO deleteAll() throws Exception{
+        CartEntity cart = cartRepository.getById(1);
+        cartItemRepository.deleteByCart(cart);
+        return getCartItem();
+    }
+
+    public CartDTO deleteOneItem(ItemEntity item) throws Exception{
+        CartEntity cart = cartRepository.getById(1);
+        cartItemRepository.deleteByCartAndItem(cart, item);
+        return getCartItem();
+    }
 
 //    public CartEntity getCart(CustomerEntity customer) throws Exception{
 //        return cartRepository.findByCustomer(customer);

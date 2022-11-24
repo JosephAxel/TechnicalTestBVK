@@ -14,7 +14,11 @@ public interface CartItemRepository extends JpaRepository<CartItemEntity, Intege
     boolean existsByCartAndItem(CartEntity cart, ItemEntity item);
 
     CartItemEntity findByCartAndItem(CartEntity cart, ItemEntity item);
-//
-//    long deleteByCart(CartEntity cart);
+
+    long deleteByCart(CartEntity cart);
+
+    long deleteByCartAndItem(CartEntity cart, ItemEntity item);
+
+
 
 }
