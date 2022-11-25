@@ -1,6 +1,5 @@
 package com.example.TechnicalTestBVK.modules.cart.controller;
 
-import com.example.TechnicalTestBVK.modules.cart.data.CartEntity;
 import com.example.TechnicalTestBVK.modules.cart.dto.CartDTO;
 import com.example.TechnicalTestBVK.modules.cart.dto.CreateCartDTO;
 import com.example.TechnicalTestBVK.modules.cart.service.CartService;
@@ -9,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/carts")
@@ -29,15 +28,6 @@ public class CartController {
     public CartDTO find() throws Exception{
         return cartService.getCartItem();
     }
-
-//    @Transactional
-//    @PutMapping("/customers/{userId}")
-//    public CartDTO update(
-//            @PathVariable("userId") CustomerEntity customer,
-//            @RequestBody List<UpdateCartItemDTO> dtos
-//    ) throws Exception{
-//        return cartService.update(dtos, customer);
-//    }
 
     @Transactional
     @DeleteMapping("/1")

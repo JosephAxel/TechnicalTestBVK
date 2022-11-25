@@ -40,7 +40,6 @@ public class CartService {
 
         for (CartItemEntity cartItem : cartItems){
             ItemDTO itemDTO = new ItemDTO(cartItem.getItem());
-            itemDTO.setQuantity(cartItem.getBuyQuantity().getQuantity());
             CartItemDTO cartItemDTO = new CartItemDTO(
                     cartItem.getId(),
                     cartItem.getBuyQuantity().getQuantity(),
@@ -70,12 +69,20 @@ public class CartService {
 
         for (BuyItemDTO buyItemDTO: dto.getItems()) {
             ItemEntity item = itemRepository.getById(buyItemDTO.getItemId());
-            CartItemEntity cartItem = null;
+            CartItemEntity cartItem = cartItemRepository.findByCartAndItem(cart, item);
+
+            Integer totalItemQuantity = 0;
+            if (cartItem != null){
+                totalItemQuantity = cartItem.getBuyQuantity().getQuantity();
+            }
+            totalItemQuantity += buyItemDTO.getQuantity();
+            if (buyItemDTO.getQuantity() > item.getQuantity().getQuantity() || totalItemQuantity > item.getQuantity().getQuantity()){
+                throw new Exception("Purchase quantity exceeds inventory item quantity");
+            }
 
 //          condition for case when you already have the item in your cart then you just need to update the quantity
             if (cartItemRepository.existsByCartAndItem(cart, item)){
-                cartItem = cartItemRepository.findByCartAndItem(cart, item);
-                cartItem.setBuyQuantity(new Quantity(cartItem.getBuyQuantity().getQuantity() + buyItemDTO.getQuantity()));
+                cartItem.setBuyQuantity(new Quantity(totalItemQuantity));
                 cartItemRepository.saveAndFlush(cartItem);
             }else{
                 cartItem = new CartItemEntity(cart, item, buyItemDTO.getQuantity());
@@ -99,28 +106,6 @@ public class CartService {
         return new CartDTO(cart.getId(), totalItem, totalPrice, cartItemDTOS);
     }
 
-//    public CartDTO update(List<UpdateCartItemDTO> dtos, CustomerEntity customer) throws Exception{
-//        List<CartItemEntity> cartItems = new ArrayList<>();
-//
-//        if (dtos.size() > 0){
-//            for (UpdateCartItemDTO dto: dtos) {
-//                CartItemEntity cartItem = cartItemRepository.findById(dto.getCartItemId()).orElse(null);
-//                if (dto.getQuantity() == 0){
-//                    cartItemRepository.delete(cartItem);
-//                }else{
-//                    cartItem.setQuantity(new Quantity(dto.getQuantity()));
-//                    cartItems.add(cartItem);
-//                }
-//            }
-//
-//            cartItemRepository.saveAllAndFlush(cartItems);
-//
-//            return getCartItem(customer);
-//        }
-//
-//        return null;
-//    }
-
     public CartDTO deleteAll() throws Exception{
         CartEntity cart = cartRepository.getById(1);
         cartItemRepository.deleteByCart(cart);
@@ -132,8 +117,4 @@ public class CartService {
         cartItemRepository.deleteByCartAndItem(cart, item);
         return getCartItem();
     }
-
-//    public CartEntity getCart(CustomerEntity customer) throws Exception{
-//        return cartRepository.findByCustomer(customer);
-//    }
 }

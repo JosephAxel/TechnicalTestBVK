@@ -1,0 +1,735 @@
+{
+	"info": {
+		"_postman_id": "f344d7f0-da75-49ff-a9fa-3881247387bf",
+		"name": "TechnicalTestBVK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Save Cart Item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\" : 1,\r\n    \"items\" : [\r\n        {\r\n            \"itemId\" : 2,\r\n            \"quantity\": 3\r\n        },\r\n        {\r\n            \"itemId\" : 1,\r\n            \"quantity\": 4\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/carts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Save Cart Item",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customerId\" : 1,\r\n    \"items\" : [\r\n        {\r\n            \"itemId\" : 2,\r\n            \"quantity\": 3\r\n        },\r\n        {\r\n            \"itemId\" : 1,\r\n            \"quantity\": 4\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/carts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 08:36:14 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"totalItem\": 7,\n    \"totalPrice\": 150000,\n    \"cartItems\": [\n        {\n            \"id\": 1,\n            \"buyQuantity\": 3,\n            \"sellPrice\": 30000,\n            \"item\": {\n                \"id\": 2,\n                \"category\": \"makanan\",\n                \"description\": \"bolu empuk enak\",\n                \"name\": \"Bolu\",\n                \"quantity\": 50,\n                \"sellPrice\": 30000\n            }\n        },\n        {\n            \"id\": 2,\n            \"buyQuantity\": 4,\n            \"sellPrice\": 15000,\n            \"item\": {\n                \"id\": 1,\n                \"category\": \"makanan\",\n                \"description\": \"biskuit enak renyah\",\n                \"name\": \"biskuit\",\n                \"quantity\": 50,\n                \"sellPrice\": 15000\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Cart Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carts/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carts",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Cart Items",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/carts/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carts",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 08:36:22 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"totalItem\": 7,\n    \"totalPrice\": 150000,\n    \"cartItems\": [\n        {\n            \"id\": 1,\n            \"buyQuantity\": 3,\n            \"sellPrice\": 30000,\n            \"item\": {\n                \"id\": 2,\n                \"category\": \"makanan\",\n                \"description\": \"bolu empuk enak\",\n                \"name\": \"Bolu\",\n                \"quantity\": 50,\n                \"sellPrice\": 30000\n            }\n        },\n        {\n            \"id\": 2,\n            \"buyQuantity\": 4,\n            \"sellPrice\": 15000,\n            \"item\": {\n                \"id\": 1,\n                \"category\": \"makanan\",\n                \"description\": \"biskuit enak renyah\",\n                \"name\": \"biskuit\",\n                \"quantity\": 50,\n                \"sellPrice\": 15000\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete all item from cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carts/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carts",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete all item from cart",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/carts/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carts",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 08:36:28 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"totalItem\": 0,\n    \"totalPrice\": 0,\n    \"cartItems\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete one item from cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carts/1/item/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carts",
+								"1",
+								"item",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete one item from cart",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/carts/1/item/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carts",
+										"1",
+										"item",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 08:36:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"totalItem\": 4,\n    \"totalPrice\": 60000,\n    \"cartItems\": [\n        {\n            \"id\": 4,\n            \"buyQuantity\": 4,\n            \"sellPrice\": 15000,\n            \"item\": {\n                \"id\": 1,\n                \"category\": \"makanan\",\n                \"description\": \"biskuit enak renyah\",\n                \"name\": \"biskuit\",\n                \"quantity\": 50,\n                \"sellPrice\": 15000\n            }\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Item",
+			"item": [
+				{
+					"name": "Set seed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/items/seed",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								"seed"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Set seed",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/items/seed",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"items",
+										"seed"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "13"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 08:34:16 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "seed berhasil"
+						}
+					]
+				},
+				{
+					"name": "Get Item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/items/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Item",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/items/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"items",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 08:34:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"category\": \"makanan\",\n    \"description\": \"biskuit enak renyah\",\n    \"name\": \"biskuit\",\n    \"quantity\": 50,\n    \"sellPrice\": 15000\n}"
+						}
+					]
+				},
+				{
+					"name": "Find item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/items?search=id:1 OR id:2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "description.description:mainan*",
+									"description": "case sensitive",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "name.name:b*",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "quantity.quantity<50",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "sellPrice.sellPrice>100000",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "id:1 OR id:2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Find all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/items",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"items"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "description.description:mainan*",
+											"description": "case sensitive",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "name.name:b*",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "quantity.quantity<50",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "sellPrice.sellPrice>100000",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 08:34:46 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"category\": \"makanan\",\n        \"description\": \"biskuit enak renyah\",\n        \"name\": \"biskuit\",\n        \"quantity\": 50,\n        \"sellPrice\": 15000\n    },\n    {\n        \"id\": 2,\n        \"category\": \"makanan\",\n        \"description\": \"bolu empuk enak\",\n        \"name\": \"Bolu\",\n        \"quantity\": 50,\n        \"sellPrice\": 30000\n    },\n    {\n        \"id\": 3,\n        \"category\": \"minuman\",\n        \"description\": \"cairan sehat bikin segar\",\n        \"name\": \"air mineral\",\n        \"quantity\": 100,\n        \"sellPrice\": 5000\n    },\n    {\n        \"id\": 4,\n        \"category\": \"minuman\",\n        \"description\": \"cairan baik untuk tulang\",\n        \"name\": \"susu\",\n        \"quantity\": 30,\n        \"sellPrice\": 10000\n    },\n    {\n        \"id\": 5,\n        \"category\": \"mainan\",\n        \"description\": \"mainan yang bisa mengeluarkan air\",\n        \"name\": \"pistol air\",\n        \"quantity\": 50,\n        \"sellPrice\": 30000\n    },\n    {\n        \"id\": 6,\n        \"category\": \"mainan\",\n        \"description\": \"mainan cowok\",\n        \"name\": \"robot-robotan\",\n        \"quantity\": 50,\n        \"sellPrice\": 50000\n    },\n    {\n        \"id\": 7,\n        \"category\": \"elektronik\",\n        \"description\": \"alat komunikasi\",\n        \"name\": \"Smartphone\",\n        \"quantity\": 20,\n        \"sellPrice\": 5500000\n    },\n    {\n        \"id\": 8,\n        \"category\": \"elektronik\",\n        \"description\": \"membuat udara bergerak\",\n        \"name\": \"Kipas angin\",\n        \"quantity\": 30,\n        \"sellPrice\": 1500000\n    }\n]"
+						},
+						{
+							"name": "Find item by description",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/items",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"items"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "description.description:mainan*",
+											"description": "case sensitive",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "name.name:b*",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "quantity.quantity<50",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "sellPrice.sellPrice>100000",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 08:35:04 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 5,\n        \"category\": \"mainan\",\n        \"description\": \"mainan yang bisa mengeluarkan air\",\n        \"name\": \"pistol air\",\n        \"quantity\": 50,\n        \"sellPrice\": 30000\n    },\n    {\n        \"id\": 6,\n        \"category\": \"mainan\",\n        \"description\": \"mainan cowok\",\n        \"name\": \"robot-robotan\",\n        \"quantity\": 50,\n        \"sellPrice\": 50000\n    }\n]"
+						},
+						{
+							"name": "Find item id 1 and 2 after checkout (qty updated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/items",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"items"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "description.description:mainan*",
+											"description": "case sensitive",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "name.name:b*",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "quantity.quantity<50",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "sellPrice.sellPrice>100000",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "id:1 OR id:2",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 08:39:21 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 2,\n        \"category\": \"makanan\",\n        \"description\": \"bolu empuk enak\",\n        \"name\": \"Bolu\",\n        \"quantity\": 47,\n        \"sellPrice\": 30000\n    },\n    {\n        \"id\": 1,\n        \"category\": \"makanan\",\n        \"description\": \"biskuit enak renyah\",\n        \"name\": \"biskuit\",\n        \"quantity\": 46,\n        \"sellPrice\": 15000\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Checkout items from cart",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/transactions/cart-checkout/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transactions",
+								"cart-checkout",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Checkout items from cart",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/transactions/cart-checkout/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"transactions",
+										"cart-checkout",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 25 Nov 2022 08:37:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"totalItem\": 7,\n    \"totalPrice\": 150000,\n    \"soldItems\": [\n        {\n            \"buyQuantity\": 3,\n            \"sellPrice\": 30000,\n            \"name\": \"Bolu\"\n        },\n        {\n            \"buyQuantity\": 4,\n            \"sellPrice\": 15000,\n            \"name\": \"biskuit\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

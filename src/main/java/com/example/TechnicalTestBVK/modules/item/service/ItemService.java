@@ -15,12 +15,6 @@ import java.util.stream.Collectors;
 public class ItemService {
     private final ItemRepository itemRepository;
 
-//    public ItemDTO save(CreateUpdateItemDTO dto) throws Exception{
-//        ItemEntity newItem = new ItemEntity(dto);
-//
-//        return new ItemDTO(itemRepository.saveAndFlush(newItem));
-//    }
-
     public String seed() throws Exception{
         ItemEntity item1 = new ItemEntity("makanan","biskuit enak renyah","biskuit", 50, 15000.0);
         ItemEntity item2 = new ItemEntity("makanan","bolu empuk enak","Bolu", 50, 30000.0);
@@ -58,10 +52,5 @@ public class ItemService {
 
     public ItemDTO update(ItemEntity updatedItem) throws Exception{
         return new ItemDTO(itemRepository.saveAndFlush(updatedItem));
-    }
-
-    public ItemDTO delete(ItemEntity item) throws Exception{
-        itemRepository.delete(item);
-        return new ItemDTO(item);
     }
 }
