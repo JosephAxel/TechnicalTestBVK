@@ -1,4 +1,5 @@
 package com.example.TechnicalTestBVK.modules.item.vo;
+import com.example.TechnicalTestBVK.exception.ValidationExceptionMessages;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,9 @@ public class SellPrice {
     private Double sellPrice;
 
     public SellPrice(Double sellPrice) throws ValidationException {
+        if (sellPrice <= 0){
+            throw new ValidationException(String.format(ValidationExceptionMessages.VALIDATION_VALUE_LESS_THAN.getMessage(), "sell price", 0));
+        }
         this.sellPrice = sellPrice;
     }
 }
